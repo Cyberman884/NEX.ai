@@ -1,0 +1,157 @@
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function Pricing() {
+  const plans = [
+    {
+      name: "Starter",
+      price: "R200",
+      period: "month",
+      description: "Perfect for individuals getting started",
+      features: [
+        "50 verified leads/month",
+        "AI messages",
+        "Basic analytics",
+        "Email support"
+      ]
+    },
+    {
+      name: "Pro",
+      price: "R400",
+      period: "month",
+      description: "Great for growing businesses",
+      features: [
+        "150 leads/month",
+        "AI messages",
+        "Lead history",
+        "Priority support",
+        "Advanced filtering"
+      ],
+      popular: true
+    },
+    {
+      name: "Agency",
+      price: "R600",
+      period: "month",
+      description: "For agencies and large teams",
+      features: [
+        "500+ leads/month",
+        "Unlimited AI messages",
+        "Export features",
+        "Dedicated support",
+        "API access",
+        "Team collaboration"
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <Navigation />
+      
+      <div className="pt-24 pb-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Our Pricing
+            </h1>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Choose the perfect plan for your business needs. All plans include our core AI features.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {plans.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="relative"
+              >
+                <Card className={`h-full transition-all duration-300 hover:shadow-2xl ${
+                  plan.popular ? "border-2 border-blue-500 glass-card" : "border-gray-200"
+                }`}>
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+                  
+                  <CardContent className="p-8">
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+                      <p className="text-slate-600 mb-4">{plan.description}</p>
+                      <div className="text-4xl font-bold text-slate-900 mb-2">
+                        {plan.price}
+                        <span className="text-lg text-slate-600 font-normal">/{plan.period}</span>
+                      </div>
+                    </div>
+                    
+                    <ul className="space-y-4 mb-8">
+                      {plan.features.map((feature) => (
+                        <li key={feature} className="flex items-center space-x-3">
+                          <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                          <span className="text-slate-600">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <Button
+                      className={`w-full py-3 rounded-full font-semibold ${
+                        plan.popular
+                          ? "apple-button text-white"
+                          : "bg-gray-100 text-slate-900 hover:bg-gray-200"
+                      }`}
+                    >
+                      Get Started
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Lifetime Deal */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Card className="glass-card border-0 shadow-2xl">
+              <CardContent className="p-12 text-center">
+                <h3 className="text-3xl font-bold text-slate-900 mb-4">
+                  🚀 Lifetime Deal
+                </h3>
+                <p className="text-xl text-slate-600 mb-6 max-w-2xl mx-auto">
+                  Unlimited lifetime access to Starter Plan (limited offer)
+                </p>
+                <div className="text-4xl font-bold text-slate-900 mb-6">
+                  R999
+                  <span className="text-lg text-slate-600 font-normal"> once-off</span>
+                </div>
+                <Button className="apple-button text-white px-8 py-4 rounded-full text-lg font-semibold">
+                  Claim Lifetime Deal
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+      
+      <Footer />
+    </div>
+  );
+}

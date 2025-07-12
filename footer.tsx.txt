@@ -1,0 +1,150 @@
+import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { Zap, Twitter, Linkedin, Facebook } from "lucide-react";
+
+export default function Footer() {
+  const productLinks = [
+    { href: "/#features", label: "Features" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/about", label: "About" },
+  ];
+
+  const supportLinks = [
+    { href: "/#contact", label: "Contact" },
+    { href: "mailto:support@nex.com", label: "Help Center" },
+  ];
+
+  const legalLinks = [
+    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/terms", label: "Terms of Service" },
+    { href: "/refund-policy", label: "Refund Policy" },
+  ];
+
+  const socialLinks = [
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Facebook, href: "#", label: "Facebook" },
+  ];
+
+  return (
+    <footer className="bg-slate-900 text-white py-16 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-4 gap-8 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="flex items-center space-x-2 mb-6">
+              <Zap className="text-2xl text-blue-500" />
+              <span className="text-2xl font-bold">Nex</span>
+            </div>
+            <p className="text-gray-400 leading-relaxed">
+              AI-powered lead generation platform helping businesses find and contact ideal clients effortlessly.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h4 className="text-lg font-semibold mb-4">Product</h4>
+            <ul className="space-y-2">
+              {productLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <a className="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                      {link.label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <h4 className="text-lg font-semibold mb-4">Support</h4>
+            <ul className="space-y-2">
+              {supportLinks.map((link) => (
+                <li key={link.href}>
+                  {link.href.startsWith("mailto:") ? (
+                    <a
+                      href={link.href}
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>
+                      <a className="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                        {link.label}
+                      </a>
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <h4 className="text-lg font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <a className="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                      {link.label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-gray-400 mb-4 md:mb-0"
+          >
+            &copy; 2025 Nex. All rights reserved.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex space-x-6"
+          >
+            {socialLinks.map((social) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label={social.label}
+              >
+                <social.icon className="text-xl" />
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </footer>
+  );
+}
